@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Marker Animations</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    #map {
+       
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+      #1{
+		  color:blue;
+		  
+		  }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+ 
+    <script>
+
+// The following example creates a marker in Stockholm, Sweden using a DROP
+// animation. Clicking on the marker will toggle the animation between a BOUNCE
+// animation and no animation.
+
+
+var markers = [];
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 13,
+    center: {lat: 59.325, lng: 18.070}
+  });
+  var marker;
+  marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    //animation: google.maps.Animation.BOUNCE,
+    position: {lat: 59.327, lng: 18.067},
+   // marker.metadata = {type: "point", id: 1};
+
+    
+  });
+  console.log("marker::"+marker.getPosition().lat());
+  var newLat=marker.getPosition().lat()+0.0015;
+  console.log("newmark::"+newLat);
+      var latlng = new google.maps.LatLng(newLat, 18.067);
+
+  marker.setPosition(latlng);
+  
+  marker2 = new google.maps.Marker({
+    map: map,
+    draggable: true,
+   // animation: google.maps.Animation.BOUNCE,
+    position: {lat: 59.327, lng: 18.067},
+    //marker.metadata = {type: "point", id: 2};
+
+  });
+ //  var newLat = marker.lat() + (Math.random() -.5) / 1500;
+//var newLon=marker.lng() + (Math.random() -.5) / 1500;
+ // marker.addListener('click', toggleBounce);
+}
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+   // marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+google.maps.event.addDomListener(window, 'load', initMap)
+
+    </script>
+     </head>
+  <body>
+    <div id="map"></div>
+    
+  </body>
+</html>
